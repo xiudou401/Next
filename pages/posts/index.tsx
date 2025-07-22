@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { getCurrentTime } from '../lib';
 
 interface Post {
   id: number;
@@ -17,7 +18,7 @@ export default function Page() {
       .then((reply) => {
         console.log(reply);
         setData(reply.posts);
-        setDt(new Date().toString());
+        setDt(getCurrentTime());
       });
   };
 
