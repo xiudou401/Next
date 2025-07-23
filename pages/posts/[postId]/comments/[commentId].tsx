@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { getCurrentTime } from '@/pages/lib';
+import { getCurrentTime } from '@/lib';
 
 interface Comment {
   id: number;

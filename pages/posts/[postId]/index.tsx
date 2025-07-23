@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { getCurrentTime } from '../../lib';
+import { getCurrentTime } from '../../../lib';
 import { useEffect, useState } from 'react';
 
 interface Post {
