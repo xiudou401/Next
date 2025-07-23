@@ -5,6 +5,7 @@ import { getCurrentTime } from '@/pages/lib';
 interface Comment {
   id: number;
   body: string;
+  user: { username: string };
 }
 
 const Page = () => {
@@ -40,6 +41,7 @@ const Page = () => {
         <>
           <h4>{dt}</h4>
           <p>{data.body}</p>
+          <p>-{data.user.username}</p>
         </>
       ) : (
         <p>Loading...</p>
