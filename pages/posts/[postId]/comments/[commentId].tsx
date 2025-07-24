@@ -30,7 +30,7 @@ const Page = () => {
     if (cid) {
       fetchData();
     }
-  }, [cid]);
+  }, []);
 
   return (
     <main>
