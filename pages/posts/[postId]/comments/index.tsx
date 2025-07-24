@@ -1,4 +1,4 @@
-import { getCurrentTime } from '@/pages/lib';
+import { getCurrentTime } from '@/lib';
 import { useEffect, useState } from 'react';
 
 interface Comment {

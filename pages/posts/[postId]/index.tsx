@@ -1,37 +1,17 @@
-import { useRouter } from 'next/router';
-import { getCurrentTime } from '../../lib';
-import { useEffect, useState } from 'react';
+import { getCurrentTime } from '../../../lib';
+import { GetStaticPropsContext } from 'next';
+interface Props {
+  id: number;
+  dt: number;
+  data: Post;
+}
 
 interface Post {
-  id: number;
   title: string;
   body: string;
 }
 
-const Page = () => {
-  const router = useRouter();
-  const id = router.query.postId;
-  const [dt, setDt] = useState('');
-  const [data, setData] = useState<Post | null>(null);
-
-  const fetchData = () => {
-    if (!id) return;
-    fetch('https://dummyjson.com/posts/' + id)
-      .then((response) => {
-        return response.json();
-      })
-      .then((reply) => {
-        setData(reply);
-        setDt(getCurrentTime());
-      });
-  };
-
-  useEffect(() => {
-    if (id) {
-      fetchData();
-    }
-  }, [id]);
-
+const Page = ({ id, dt, data }: Props) => {
   return (
     <main>
       <h1> Post Details page {id} </h1>
@@ -49,3 +29,30 @@ const Page = () => {
 };
 
 export default Page;
+
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { postId: '1' } }, { params: { postId: '2' } }],
+    fallback: false,
+  };
+}
+
+export async function getStaticProps(context: GetStaticPropsContext) {
+  if (!context.params || !context.params.postId) {
+    return {
+      notFound: true,
+    };
+  }
+  const id = context.params.postId;
+  const dt = getCurrentTime();
+  const response = await fetch('https://dummyjson.com/posts/' + id);
+  const reply = await response.json();
+
+  return {
+    props: {
+      id,
+      dt,
+      data: reply,
+    },
+  };
+}
