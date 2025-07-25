@@ -41,11 +41,11 @@ export async function getStaticPaths() {
   const response = await fetch('https://dummyjson.com/posts');
   const reply: { posts: PostSummary[] } = await response.json();
   return {
-    // paths: [{ params: { postId: '1' } }, { params: { postId: '2' } }],
-    paths: reply.posts.map((post) => ({
-      params: { postId: post.id.toString() },
-    })),
-    fallback: false,
+    paths: [{ params: { postId: '1' } }, { params: { postId: '2' } }],
+    // paths: reply.posts.map((post) => ({
+    //   params: { postId: post.id.toString() },
+    // })),
+    fallback: 'blocking',
   };
 }
 
