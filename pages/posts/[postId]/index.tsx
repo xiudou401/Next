@@ -1,3 +1,4 @@
+import RouterButton from '@/components/RouterButton';
 import { getCurrentTime } from '../../../lib';
 import { GetStaticPropsContext } from 'next';
 interface Props {
@@ -18,7 +19,9 @@ const Page = ({ id, dt, data }: Props) => {
       {data ? (
         <>
           <h4>{data.title}</h4>
+
           <h4>{dt}</h4>
+          <RouterButton />
           <p>{data.body}</p>
         </>
       ) : (

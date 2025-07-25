@@ -1,4 +1,6 @@
+import RouterButton from '@/components/RouterButton';
 import { getCurrentTime } from '../../lib';
+import Link from 'next/link';
 
 interface Post {
   id: number;
@@ -17,10 +19,13 @@ export default function Page({ dt, data }: Props) {
     <main>
       <h1>Posts List Page</h1>
       <h4>{dt}</h4>
+      <RouterButton />
       <ul>
         {data.map((item, index: number) => (
           <li key={index}>
-            <h4>{item.title}</h4>
+            <h4>
+              <Link href={`/posts/${item.id}`}>{item.title}</Link>
+            </h4>
           </li>
         ))}
       </ul>

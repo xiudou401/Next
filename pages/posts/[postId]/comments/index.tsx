@@ -1,3 +1,4 @@
+import RouterButton from '@/components/RouterButton';
 import { getCurrentTime } from '@/lib';
 import { useEffect, useState } from 'react';
 
@@ -30,6 +31,7 @@ export default function Page() {
     <main>
       <h1>Comments List Page</h1>
       <h4>{dt}</h4>
+      <RouterButton />
       <ul>
         {data.map((item) => (
           <li key={item.id}>{item.body}</li>
