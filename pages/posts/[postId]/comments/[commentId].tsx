@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { getCurrentTime } from '@/lib';
+import RouterButton from '@/components/RouterButton';
 
 interface Comment {
   id: number;
@@ -30,7 +31,7 @@ const Page = () => {
     if (cid) {
       fetchData();
     }
-  }, []);
+  }, [cid]);
 
   return (
     <main>
@@ -40,6 +41,7 @@ const Page = () => {
       {data ? (
         <>
           <h4>{dt}</h4>
+          <RouterButton />
           <p>{data.body}</p>
           <p>-{data.user.username}</p>
         </>

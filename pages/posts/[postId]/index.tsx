@@ -1,5 +1,8 @@
+import RouterButton from '@/components/RouterButton';
 import { getCurrentTime } from '../../../lib';
 import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
+
 interface Props {
   id: number;
   dt: number;
@@ -11,29 +14,37 @@ interface Post {
   body: string;
 }
 
+interface PostSummary {
+  id: number;
+}
+
 const Page = ({ id, dt, data }: Props) => {
-  return (
-    <main>
-      <h1> Post Details page {id} </h1>
-      {data ? (
-        <>
-          <h4>{data.title}</h4>
-          <h4>{dt}</h4>
-          <p>{data.body}</p>
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </main>
-  );
+  const router = useRouter();
+  if (router.isFallback) {
+    return <h1>Loading...</h1>;
+  } else
+    return (
+      <main>
+        <h1> Post Details page {id} </h1>
+        <h4>{data.title}</h4>
+        <h4>{dt}</h4>
+        <RouterButton />
+        <p>{data.body}</p>
+      </main>
+    );
 };
 
 export default Page;
 
 export async function getStaticPaths() {
+  const response = await fetch('https://dummyjson.com/posts');
+  const reply: { posts: PostSummary[] } = await response.json();
   return {
     paths: [{ params: { postId: '1' } }, { params: { postId: '2' } }],
-    fallback: false,
+    // paths: reply.posts.map((post) => ({
+    //   params: { postId: post.id.toString() },
+    // })),
+    fallback: true,
   };
 }
 
