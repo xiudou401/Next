@@ -37,8 +37,8 @@ const Page = ({ id, dt, data }: Props) => {
 export default Page;
 
 export async function getStaticPaths() {
-  const response = await fetch('https://dummyjson.com/posts');
-  const reply: { posts: PostSummary[] } = await response.json();
+  // const response = await fetch('https://dummyjson.com/posts');
+  // const reply: { posts: PostSummary[] } = await response.json();
   return {
     paths: [{ params: { postId: '1' } }, { params: { postId: '2' } }],
     // paths: reply.posts.map((post) => ({
